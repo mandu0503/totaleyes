@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kt.totaleyes.mapper.SampleMapper">
+
+	<select id="getBoardInfoCount" resultType="int">
+		SELECT 
+			COUNT(1) AS CNT
+		FROM BOARD_INFO
+		<where>
+			<if test='searchType == "subject" and searchNm != null and searchNm != ""'>
+			AND SUBJECT = #{searchNm}
+			</if>
+		</where>
+	</select>
+
+	<select id="getBoardInfoList" resultType="com.kt.totaleyes.vo.SampleVo">
+		SELECT 
+			SEQ,
+			SUBJECT,
+			CREATE_DT,
+			CREATE_ID
+		FROM BOARD_INFO
+		<where>
+			<if test='searchType == "subject" and searchNm != null and searchNm != ""'>
+			AND SUBJECT = #{searchNm}
+			</if>
+		</where>
+		ORDER BY SEQ DESC
+		LIMIT #{listSize} OFFSET #{startList}
+	</select>
+</mapper>

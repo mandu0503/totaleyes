@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kt.totaleyes.security.mapper.UserMapper">
+	<select id="getUserById" resultType="com.kt.totaleyes.security.vo.UserVo">
+		SELECT 
+			USER_ID,
+			USER_PW,
+			USER_NM,
+			USER_ROLE
+		FROM USER_INFO
+		WHERE USER_ID = #{userId}
+	</select>
+</mapper>
