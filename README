@@ -1,0 +1,24 @@
+$.ajax({
+			url: url  + '?_csrf=' + 'c4f2bf04-85a6-418d-934f-a3048de25697',
+			type: "post",
+			contentType: "application/json",
+			data:JSON.stringify(setOptionMixSendData()),
+			beforeSend: function(xhr, opts) {
+				loading_start();
+			},
+			success: function(data) {
+
+				loading_finish();
+				if (data.returnCode == '0000') {
+					
+// 				} else {
+// 					alert(data.message);
+// 			        response_redirect(data);
+             
+				}
+			},
+			error: function(error) {
+				loading_finish();
+				alert("서비스가 원활하지 않습니다. 잠시 후 다시 시도하세요.");
+		  	}
+		});
