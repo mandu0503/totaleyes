@@ -25,20 +25,20 @@
 			biz_nm, biz_no, ceo_nm, biz_cndt, biz_type, agnt_nm, agnt_email, agnt_cntct_no
 			, del_yn, apprvl_yn, created_tm, created_by, updated_tm, updated_by)
 		values(#{bizNm}, #{bizNo}, #{ceoNm}, #{bizCndt}, #{bizType}, #{agntNm}, #{agntEmail}, #{agntCntctNo}
-			, 'N', 'N', , current_timestamp, #{userId}, current_timestamp, #{userId})
+			, 'N', 'N', current_timestamp, #{userId}, current_timestamp, #{userId})
 	</insert>
 	
 	<insert id="createBizUser" parameterType="com.kt.totaleyes.vo.UserVo">
 		insert into tbl_user_info (user_id, pwd, user_nm, user_email, user_cntct_no, user_role, biz_seq, mstr_yn
 			, del_yn, created_tm, created_by, updated_tm, updated_by)
-		values(#{userId}, #{pwd}, #{userRole}, #{userNm}, #{userEmail}, #{userCntctNo}, #{userRole}, #{bizSeq}, #{mstrYn}
+		values(#{userId}, crypt(#{pwd}, gen_salt('MD5')), #{userNm}, #{userEmail}, #{userCntctNo}, #{userRole}, #{bizSeq}, #{mstrYn}
 			, 'N', current_timestamp, #{userId}, current_timestamp, #{userId})
 	</insert>
 	
 	<insert id="createUser" parameterType="com.kt.totaleyes.vo.UserVo">
 		insert into tbl_user_info (user_id, pwd, user_nm, user_email, user_cntct_no, user_role
 			, del_yn, created_tm, created_by, updated_tm, updated_by)
-		values(#{userId}, #{pwd}, #{userNm}, #{userEmail}, #{userCntctNo}, #{userRole}
+		values(#{userId}, crypt(#{pwd}, gen_salt('MD5')), #{userNm}, #{userEmail}, #{userCntctNo}, #{userRole}
 			, 'N', current_timestamp, #{userId}, current_timestamp, #{userId})
 	</insert>
 	

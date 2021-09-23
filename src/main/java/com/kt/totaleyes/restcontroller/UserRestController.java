@@ -32,6 +32,9 @@ public class UserRestController {
 	public GenericMessage register (GenericMessage message, UserVo userVo) {
 		
 		log.debug("** userVo:{}", userVo);
+		
+		userService.createUser(userVo);
+		
 		message.setReturn(ReturnCode.OK);
 		return message;
 	}

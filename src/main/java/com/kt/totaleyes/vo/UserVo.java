@@ -13,7 +13,8 @@ public class UserVo {
 	private String pwd;
 	private String userNm;
 	private String userEmail;
-	private String userCntntNo;
+	private String userCntctNo;
+	private String userRole;
 	private String mstrYn;
 	private Integer bizSeq;
 	private String bizNm;
