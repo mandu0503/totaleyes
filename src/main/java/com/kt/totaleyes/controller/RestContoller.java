@@ -11,7 +11,7 @@ import com.kt.totaleyes.common.ReturnCode;
 @RestController
 public class RestContoller {
 	
-	@RequestMapping("/rest/sample")
+	@RequestMapping("/rest/sample.do")
 	public @ResponseBody GenericMessage restSample(GenericMessage message
 			,@RequestParam(name = "type", defaultValue = "") String type) {
 				
@@ -21,7 +21,7 @@ public class RestContoller {
 	    return message;
 	}
 	
-	@RequestMapping("/rest/sample1")
+	@RequestMapping("/rest/sample1.do")
 	public @ResponseBody String restSample(
 			@RequestParam(name = "type", defaultValue = "") String type) {
 				

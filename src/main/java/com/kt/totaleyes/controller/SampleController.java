@@ -18,7 +18,7 @@ public class SampleController {
 	@Autowired
 	private SampleService sampleService;
 	
-	@RequestMapping("/sample")
+	@RequestMapping("/sample.do")
 	public String sample (Model model
 			, @RequestParam(required = false, defaultValue = "1") int page
 			, @RequestParam(required = false, defaultValue = "1") int startRange) {
@@ -33,7 +33,7 @@ public class SampleController {
 		return "sample/sample";
 	}
 	
-	@RequestMapping("/getSampleList")
+	@RequestMapping("/getSampleList.do")
 	public String getSampleList (Model model
 			, @RequestParam(required = false, defaultValue = "1") int page
 			, @RequestParam(required = false, defaultValue = "1") int startRange

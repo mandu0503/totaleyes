@@ -41,7 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .antMatchers("/**").authenticated()
         .and()
         	.formLogin()
-	        .loginPage("/login")
+	        .loginPage("/login.do")
 	        .loginProcessingUrl("/authenticate")	        
 	        .failureHandler(loginFailureHandler)
 	        .successHandler(loginSucessHandler())

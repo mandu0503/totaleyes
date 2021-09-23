@@ -9,7 +9,7 @@
 <script>
 $(function(){
 	$.ajax({
-	    url:'/getSampleList',
+	    url:'/getSampleList.do',
 	    type:'post',
 	    dataType: 'html',
 	    data: {
@@ -42,7 +42,7 @@ function fn_search(page, startRange){
 	var searchType = $("#searchType").val();
 	var searchNm = $("#searchNm").val();
 	$.ajax({
-	    url:'/getSampleList',
+	    url:'/getSampleList.do',
 	    type:'post',
 	    dataType: 'html',
 	    data: {
@@ -59,7 +59,7 @@ function fn_search(page, startRange){
 }
 function fn_restSample(){
 	$.ajax({
-	    url:'/rest/sample',
+	    url:'/rest/sample.do',
 	    type:'post',
 	    dataType: 'json',
 	    data: {
