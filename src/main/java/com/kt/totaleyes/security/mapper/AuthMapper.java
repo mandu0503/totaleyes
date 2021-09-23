@@ -8,4 +8,6 @@ import com.kt.totaleyes.security.vo.AuthVo;
 public interface AuthMapper {
 	
 	public AuthVo getUserById(String userId);
+	
+	public int getCheckByPwd(AuthVo authVo);
 }

@@ -13,25 +13,25 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.kt.totaleyes.security.service.UserService;
+import com.kt.totaleyes.security.service.AuthService;
 import com.kt.totaleyes.security.vo.AuthVo;
 
 @Component("authProvider")
 public class AuthProvider implements AuthenticationProvider{
 	
 	@Autowired
-	private UserService userService;
+	private AuthService authService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String userId = authentication.getName();
-		String pw = authentication.getCredentials().toString();
-		AuthVo user = userService.loadUserByUsername(userId);
+		String pwd = authentication.getCredentials().toString();
+		AuthVo user = authService.loadUserByUsername(userId);
+		user.setPwd(pwd);
+		if(authService.getCheckByPwd(user) == 0) {
+			throw new BadCredentialsException("비밀 번호가 틀립니다.");
+		}
 		
-		if (!pw.equals(user.getPassword())) {
-            throw new BadCredentialsException("비밀 번호가 틀립니다.");
-        }
-        
 		List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
         return new UsernamePasswordAuthenticationToken(user, null, grantedAuthorityList);

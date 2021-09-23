@@ -68,6 +68,10 @@ function fn_restSample(){
 	    },
 	    success:function(data){
 	    	console.log(data);
+	    },
+	    error:function(err){
+	    	console.log(err);
+	    	console.log(err.responseJSON);
 	    }
 	});
 }

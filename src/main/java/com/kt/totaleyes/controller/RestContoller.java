@@ -13,12 +13,12 @@ public class RestContoller {
 	
 	@RequestMapping("/rest/sample.do")
 	public @ResponseBody GenericMessage restSample(GenericMessage message
-			,@RequestParam(name = "type", defaultValue = "") String type) {
+			,@RequestParam(name = "type", defaultValue = "") String type) throws Exception {
 				
 		message.setReturn(ReturnCode.OK);
 	    message.setData("TEST");
-
-	    return message;
+	    throw new Exception();
+	    //return message;
 	}
 	
 	@RequestMapping("/rest/sample1.do")

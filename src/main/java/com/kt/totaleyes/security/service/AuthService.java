@@ -9,7 +9,7 @@ import com.kt.totaleyes.security.mapper.AuthMapper;
 import com.kt.totaleyes.security.vo.AuthVo;
 
 @Service
-public class UserService implements UserDetailsService{
+public class AuthService implements UserDetailsService{
 	@Autowired
 	private AuthMapper authMapper;
 	
@@ -20,6 +20,10 @@ public class UserService implements UserDetailsService{
             throw new UsernameNotFoundException("회원정보가 없습니다.");
         }
         return user;
+	}
+	
+	public int getCheckByPwd(AuthVo authVo) {
+		return authMapper.getCheckByPwd(authVo);
 	}
 
 }

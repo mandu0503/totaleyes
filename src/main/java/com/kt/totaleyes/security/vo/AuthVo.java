@@ -11,7 +11,7 @@ public class AuthVo implements UserDetails{
 	private static final long serialVersionUID = -6730608047424593871L;
 	
 	private String userId;
-	private String userPw;
+	private String pwd;
 	private String userNm;
 	private String userRole;
     private boolean ENABLED;
@@ -26,7 +26,7 @@ public class AuthVo implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		return userPw;
+		return pwd;
 	}
 
 	@Override
@@ -62,12 +62,12 @@ public class AuthVo implements UserDetails{
 		this.userId = userId;
 	}
 
-	public String getUserPw() {
-		return userPw;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setUserPw(String userPw) {
-		this.userPw = userPw;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public String getUserNm() {

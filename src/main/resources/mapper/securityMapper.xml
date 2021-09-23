@@ -5,10 +5,17 @@
 	<select id="getUserById" resultType="com.kt.totaleyes.security.vo.AuthVo">
 		SELECT 
 			USER_ID,
-			USER_PW,
 			USER_NM,
 			USER_ROLE
-		FROM USER_INFO
+		FROM TBL_USER_INFO
 		WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="getCheckByPwd" resultType="int">
+		SELECT 
+			COUNT(1) AS CNT
+		FROM TBL_USER_INFO
+		WHERE USER_ID = #{userId}
+		  AND PWD = CRYPT(#{pwd},PWD)
 	</select>
 </mapper>
