@@ -57,6 +57,20 @@ function fn_search(page, startRange){
 	    }
 	});
 }
+function fn_restSample(){
+	$.ajax({
+	    url:'/rest/sample',
+	    type:'post',
+	    dataType: 'json',
+	    data: {
+	    	'${_csrf.parameterName}' : '${_csrf.token}',
+	    	'type' : 'type'
+	    },
+	    success:function(data){
+	    	console.log(data);
+	    }
+	});
+}
 </script>
 </head>
 <style>
@@ -78,6 +92,10 @@ function fn_search(page, startRange){
 	</div>
 	<div id="listDiv" style="text-align: -webkit-center;">
 		
+	</div>
+	
+	<div> 
+		<button onclick="fn_restSample()">rest sample</button>
 	</div>
 </body>
 </html>
