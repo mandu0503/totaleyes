@@ -32,25 +32,30 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 	    http.authorizeRequests()
-	   	    .antMatchers("/login").permitAll()
-	   	    .antMatchers("/logout").permitAll()
+	   	    .antMatchers("/login.do").permitAll()
+	   	    .antMatchers("/logout.do").permitAll()
+	   	    .antMatchers("/api/user/**").permitAll()
+	   	    .antMatchers("/user/**").permitAll()
 	        .antMatchers("/**").hasRole("USER, ADMIN")
 	        //.antMatchers("/admin/**").access("ROLE_ADMIN")
-	        .antMatchers("/**").authenticated();
-	    
-        http.formLogin()
+	        .antMatchers("/**").authenticated()
+        .and()
+        	.formLogin()
 	        .loginPage("/login")
 	        .loginProcessingUrl("/authenticate")	        
 	        .failureHandler(loginFailureHandler)
 	        .successHandler(loginSucessHandler())
 	        .usernameParameter("userId")
-	        .passwordParameter("password");
-        
-        http.logout()
-	        .logoutUrl("/logout") // default
-	        .logoutSuccessUrl("/login")
+	        .passwordParameter("password")
+        .and()
+        	.logout()
+	        .logoutUrl("/logout.do") // default
+	        .logoutSuccessUrl("/login.do")
 	        .invalidateHttpSession(true)
-	        .permitAll();
+	    .and()
+	    	.exceptionHandling()
+	    	.accessDeniedPage("denied.do")
+	        ;
 	}
 	
 	@Override
@@ -66,6 +71,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
     public AuthenticationSuccessHandler loginSucessHandler() {
-      return new LoginSucessHandler("/main");
+      return new LoginSucessHandler("/main.do");
     }
 }
