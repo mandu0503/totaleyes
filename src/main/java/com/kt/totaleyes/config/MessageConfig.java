@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
 import com.kt.totaleyes.common.MessageArgumentResolver;
 
 @Configuration
@@ -73,5 +76,15 @@ public class MessageConfig implements WebMvcConfigurer {
         localeResolver.setDefaultLocale(Locale.KOREAN);
         return localeResolver;
     }
-
+    
+    @Bean
+    public MessageSourceAccessor messageSourceAccessor() {
+    	MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(messageSource());
+    	return messageSourceAccessor;
+    }
+    
+    @Bean
+	public MappingJackson2JsonView jsonView() {
+		return new MappingJackson2JsonView();
+	}
 }
