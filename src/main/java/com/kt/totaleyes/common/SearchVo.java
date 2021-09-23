@@ -1,6 +1,6 @@
 package com.kt.totaleyes.common;
 
-import com.kt.totaleyes.page.Pagenation;
+import com.kt.totaleyes.common.page.Pagenation;
 
 public class SearchVo extends Pagenation{
 

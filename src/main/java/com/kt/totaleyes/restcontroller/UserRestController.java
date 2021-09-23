@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.totaleyes.common.Const;
-import com.kt.totaleyes.message.GenericMessage;
-import com.kt.totaleyes.message.ReturnCode;
+import com.kt.totaleyes.common.message.GenericMessage;
+import com.kt.totaleyes.common.message.ReturnCode;
 import com.kt.totaleyes.service.UserService;
 import com.kt.totaleyes.vo.UserVo;
 

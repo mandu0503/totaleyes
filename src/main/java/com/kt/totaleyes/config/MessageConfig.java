@@ -17,7 +17,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.kt.totaleyes.message.MessageArgumentResolver;
+import com.kt.totaleyes.common.message.MessageArgumentResolver;
 
 @Configuration
 public class MessageConfig implements WebMvcConfigurer {

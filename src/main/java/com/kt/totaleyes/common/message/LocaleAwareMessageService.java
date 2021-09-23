@@ -1,4 +1,4 @@
-package com.kt.totaleyes.message;
+package com.kt.totaleyes.common.message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

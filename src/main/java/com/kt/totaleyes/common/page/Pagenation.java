@@ -1,4 +1,4 @@
-package com.kt.totaleyes.page;
+package com.kt.totaleyes.common.page;
 
 import java.io.Serializable;
 

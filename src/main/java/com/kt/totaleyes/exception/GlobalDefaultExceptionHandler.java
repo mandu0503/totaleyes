@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.kt.totaleyes.message.GenericMessage;
+import com.kt.totaleyes.common.message.GenericMessage;
 
 import lombok.extern.slf4j.Slf4j;
 
