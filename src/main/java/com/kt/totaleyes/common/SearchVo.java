@@ -1,5 +1,7 @@
 package com.kt.totaleyes.common;
 
+import com.kt.totaleyes.page.Pagenation;
+
 public class SearchVo extends Pagenation{
 
 	private static final long serialVersionUID = 4260260117430736501L;

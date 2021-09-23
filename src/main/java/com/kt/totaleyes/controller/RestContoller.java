@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kt.totaleyes.common.GenericMessage;
-import com.kt.totaleyes.common.ReturnCode;
+import com.kt.totaleyes.message.GenericMessage;
+import com.kt.totaleyes.message.ReturnCode;
 
 @RestController
 public class RestContoller {

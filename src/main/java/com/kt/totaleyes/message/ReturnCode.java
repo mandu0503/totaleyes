@@ -1,4 +1,4 @@
-package com.kt.totaleyes.common;
+package com.kt.totaleyes.message;
 
 public enum ReturnCode {
 	

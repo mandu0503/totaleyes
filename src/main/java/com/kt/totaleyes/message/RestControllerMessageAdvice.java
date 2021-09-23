@@ -1,4 +1,4 @@
-package com.kt.totaleyes.common;
+package com.kt.totaleyes.message;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
