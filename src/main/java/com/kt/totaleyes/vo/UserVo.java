@@ -10,7 +10,7 @@ import lombok.ToString;
 public class UserVo {
 
 	private String userId;
-	private String passwd;
+	private String pwd;
 	private String userNm;
 	private String userEmail;
 	private String userCntntNo;

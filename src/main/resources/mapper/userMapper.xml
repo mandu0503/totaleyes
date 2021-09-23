@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kt.totaleyes.mapper.UserMapper">
+
+	<select id="findByBizNo" parameterType="String" resultType="Integer">
+		select count(*)
+		from tbl_biz_info
+		where
+			biz_no = #{bizNo}
+		and del_yn = 'N'
+	</select>
+	
+	<select id="findByBizNoAndApprvlY" resultType="Integer">
+		select count(*)
+		from tbl_biz_info
+		where
+			biz_no = #{bizNo}
+		and del_yn = 'N'
+		and apprvl_yn = 'Y'
+	</select>
+		
+	<insert id="createBiz" parameterType="com.kt.totaleyes.vo.UserVo" useGeneratedKeys="true" keyProperty="bizSeq">
+		insert into	tbl_biz_info(
+			biz_nm, biz_no, ceo_nm, biz_cndt, biz_type, agnt_nm, agnt_email, agnt_cntct_no
+			, del_yn, apprvl_yn, created_tm, created_by, updated_tm, updated_by)
+		values(#{bizNm}, #{bizNo}, #{ceoNm}, #{bizCndt}, #{bizType}, #{agntNm}, #{agntEmail}, #{agntCntctNo}
+			, 'N', 'N', , current_timestamp, #{userId}, current_timestamp, #{userId})
+	</insert>
+	
+	<insert id="createBizUser" parameterType="com.kt.totaleyes.vo.UserVo">
+		insert into tbl_user_info (user_id, pwd, user_nm, user_email, user_cntct_no, user_role, biz_seq, mstr_yn
+			, del_yn, created_tm, created_by, updated_tm, updated_by)
+		values(#{userId}, #{pwd}, #{userRole}, #{userNm}, #{userEmail}, #{userCntctNo}, #{userRole}, #{bizSeq}, #{mstrYn}
+			, 'N', current_timestamp, #{userId}, current_timestamp, #{userId})
+	</insert>
+	
+	<insert id="createUser" parameterType="com.kt.totaleyes.vo.UserVo">
+		insert into tbl_user_info (user_id, pwd, user_nm, user_email, user_cntct_no, user_role
+			, del_yn, created_tm, created_by, updated_tm, updated_by)
+		values(#{userId}, #{pwd}, #{userNm}, #{userEmail}, #{userCntctNo}, #{userRole}
+			, 'N', current_timestamp, #{userId}, current_timestamp, #{userId})
+	</insert>
+	
+</mapper>
