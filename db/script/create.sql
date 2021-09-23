@@ -20,7 +20,7 @@ CREATE TABLE "totaleyes"."tbl_user_info"
 	"user_cntct_no" VARCHAR(32)  NOT NULL, -- 사용자_연락처_번호
 	"user_role"     VARCHAR(32)  NOT NULL, -- 사용자_권한
 	"biz_seq"       INT4         NULL,     -- 회사_일련번호
-	"mstr_yn"       VARCHAR(1)   NULL     DEFAULT 'N', -- 대표_여부
+	"mstr_yn"       VARCHAR(1)   NULL,     -- 대표_여부
 	"del_yn"        VARCHAR(1)   NULL     DEFAULT 'N', -- 삭제_여부
 	"apprvl_yn"     VARCHAR(1)   NULL     DEFAULT 'N', -- 승인_여부
 	"apprvl_tm"     TIMESTAMP    NULL,     -- 승인_시간
