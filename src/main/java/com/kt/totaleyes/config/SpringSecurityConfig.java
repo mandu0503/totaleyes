@@ -54,7 +54,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .invalidateHttpSession(true)
 	    .and()
 	    	.exceptionHandling()
-	    	.accessDeniedPage("denied.do")
+	    	.accessDeniedPage("/denied.do")
 	        ;
 	}
 	
