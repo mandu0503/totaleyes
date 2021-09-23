@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserVo implements UserDetails{
+public class AuthVo implements UserDetails{
 	private static final long serialVersionUID = -6730608047424593871L;
 	
 	private String userId;

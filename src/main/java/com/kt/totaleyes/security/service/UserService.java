@@ -5,17 +5,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.kt.totaleyes.security.mapper.UserMapper;
-import com.kt.totaleyes.security.vo.UserVo;
+import com.kt.totaleyes.security.mapper.AuthMapper;
+import com.kt.totaleyes.security.vo.AuthVo;
 
 @Service
 public class UserService implements UserDetailsService{
 	@Autowired
-	private UserMapper userMapper;
+	private AuthMapper authMapper;
 	
 	@Override
-	public UserVo loadUserByUsername(String userId) throws UsernameNotFoundException {
-		UserVo user = userMapper.getUserById(userId);
+	public AuthVo loadUserByUsername(String userId) throws UsernameNotFoundException {
+		AuthVo user = authMapper.getUserById(userId);
         if(user==null) {
             throw new UsernameNotFoundException("회원정보가 없습니다.");
         }

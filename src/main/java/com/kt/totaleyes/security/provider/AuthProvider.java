@@ -14,7 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.kt.totaleyes.security.service.UserService;
-import com.kt.totaleyes.security.vo.UserVo;
+import com.kt.totaleyes.security.vo.AuthVo;
 
 @Component("authProvider")
 public class AuthProvider implements AuthenticationProvider{
@@ -26,7 +26,7 @@ public class AuthProvider implements AuthenticationProvider{
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String userId = authentication.getName();
 		String pw = authentication.getCredentials().toString();
-		UserVo user = userService.loadUserByUsername(userId);
+		AuthVo user = userService.loadUserByUsername(userId);
 		
 		if (!pw.equals(user.getPassword())) {
             throw new BadCredentialsException("비밀 번호가 틀립니다.");
