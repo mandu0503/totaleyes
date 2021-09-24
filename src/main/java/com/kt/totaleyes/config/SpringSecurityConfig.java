@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.kt.totaleyes.security.handler.LoginAccessDeniedHandler;
 import com.kt.totaleyes.security.handler.LoginFailureHandler;
 import com.kt.totaleyes.security.handler.LoginSucessHandler;
 import com.kt.totaleyes.security.provider.AuthProvider;
@@ -22,6 +23,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private LoginFailureHandler loginFailureHandler;
+	
+	@Autowired
+	private LoginAccessDeniedHandler loginAccessDeniedHandler;
 				
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -32,11 +36,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 	    http.authorizeRequests()
-	   	    .antMatchers("/login.do").permitAll()
-	   	    .antMatchers("/logout.do").permitAll()
+	   	    .antMatchers("/login.do","/logout.do","denied.do","error.do").permitAll()
 	   	    .antMatchers("/api/user/**").permitAll()
 	   	    .antMatchers("/user/**").permitAll()
-	        .antMatchers("/**").hasRole("USER, ADMIN")
+	   	    .antMatchers("/sample/**").hasAnyRole("USER")
+	        .antMatchers("/**").hasAnyRole("USER, ADMIN")
 	        //.antMatchers("/admin/**").access("ROLE_ADMIN")
 	        .antMatchers("/**").authenticated()
         .and()
@@ -54,7 +58,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .invalidateHttpSession(true)
 	    .and()
 	    	.exceptionHandling()
-	    	.accessDeniedPage("/denied.do")
+	    	.accessDeniedHandler(loginAccessDeniedHandler)
 	        ;
 	}
 	
