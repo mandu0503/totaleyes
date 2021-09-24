@@ -1,13 +1,19 @@
 package com.kt.totaleyes.controller;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kt.totaleyes.security.vo.AuthVo;
+import com.kt.totaleyes.common.SearchVo;
+import com.kt.totaleyes.service.UserService;
+import com.kt.totaleyes.vo.UserVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,15 +22,30 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/admin")
 public class AdminController {
 
+	@Autowired
+	private UserService userService;
+	
 	@PreAuthorize("hasRole('ADMIN')")
-	@RequestMapping("/test")
-	public String test (Authentication authentication, Model model) {
-		log.info("++++admin");
-		log.debug("++ authentication : {}", authentication);
-		AuthVo userVo = (AuthVo)authentication.getPrincipal();
+	@RequestMapping("/user/apprvl.do")
+	public String userList (Authentication authentication, Model model
+			, @RequestParam(required = false, defaultValue = "1") int page
+			, @RequestParam(required = false, defaultValue = "1") int startRange
+			, @RequestParam(required = false, defaultValue = "") String searchType
+			, @RequestParam(required = false, defaultValue = "") String searchNm) {
 		
-		log.debug("++ userVo: {}", userVo.toString());
-		return "admin/test";
+		SearchVo searchVo = new SearchVo();		
+		searchVo.setSearchType(searchType);
+		searchVo.setSearchNm(searchNm);
+		
+		int tot = userService.countByApprvlN(searchVo);		
+		searchVo.pageInfo(page, startRange, tot);
+		
+		List<UserVo> users = userService.findByApprvlN(searchVo);
+		
+		model.addAttribute("searchVo", searchVo);
+		model.addAttribute("users", users);
+		return "admin/user/apprvl";
 	}
+	
 	
 }

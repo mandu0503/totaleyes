@@ -1,11 +1,14 @@
 package com.kt.totaleyes.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.totaleyes.common.Const;
+import com.kt.totaleyes.common.SearchVo;
 import com.kt.totaleyes.mapper.UserMapper;
 import com.kt.totaleyes.service.UserService;
 import com.kt.totaleyes.vo.UserVo;
@@ -50,4 +53,15 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public int countByApprvlN(SearchVo searchVo) {
+		// TODO Auto-generated method stub
+		return userMapper.countByApprvlN(searchVo);
+	}
+
+	@Override
+	public List<UserVo> findByApprvlN(SearchVo searchVo) {
+		// TODO Auto-generated method stub
+		return userMapper.findByApprvlN(searchVo);
+	}
 }

@@ -42,4 +42,37 @@
 			, 'N', current_timestamp, #{userId}, current_timestamp, #{userId})
 	</insert>
 	
+	<select id="countByApprvlN" resultType="int">
+		select
+			count(1) as cnt
+		from
+			tbl_user_info a
+			left outer join tbl_biz_info b on a.biz_seq = b.biz_seq and b.del_yn = 'N'
+		where
+			a.del_yn = 'N'
+		and	a.apprvl_yn = 'N'
+		and (a.mstr_yn ='Y' or a.mstr_yn is null)
+		<if test='searchType == "name" and searchNm != null and searchNm != ""'>
+			and a.user_nm like '%' || #{searchNm} || '%'
+		</if>
+	</select>
+	
+	<select id="findByApprvlN" resultType="com.kt.totaleyes.vo.UserVo">
+		select
+			a.user_id, a.user_nm, a.user_email, a.user_cntct_no, a.mstr_yn, to_char(a.created_tm, 'yyyy-mm-dd hh24:mi:ss') as created_tm 
+			, b.biz_nm, b.biz_no, b.ceo_nm, b.biz_cndt, biz_type, b.agnt_nm, b.agnt_email, b.agnt_email, b.apprvl_yn as bizApprvlYn
+		from
+			tbl_user_info a
+			left outer join tbl_biz_info b on a.biz_seq = b.biz_seq and b.del_yn = 'N'
+		where
+			a.del_yn = 'N'
+		and a.apprvl_yn = 'N'
+		and (a.mstr_yn ='Y' or a.mstr_yn is null)
+		<if test='searchType == "name" and searchNm != null and searchNm != ""'>
+			and a.user_nm like '%' || #{searchNm} || '%'
+		</if>
+		order by created_tm desc
+		limit #{listSize} offset #{startList}
+	</select>
+	
 </mapper>
