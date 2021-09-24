@@ -1,5 +1,7 @@
 package com.kt.totaleyes.vo;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,8 +9,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserVo {
+public class UserVo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7723642932846116355L;
 	private String userId;
 	private String pwd;
 	private String userNm;
@@ -25,4 +31,7 @@ public class UserVo {
 	private String agntNm;
 	private String agntEmail;
 	private String agntCntctNo;	
+	
+	private String createdTm;
+	private String bizApprvlYn;
 }

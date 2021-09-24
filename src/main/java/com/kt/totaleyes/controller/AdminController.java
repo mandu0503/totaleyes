@@ -26,7 +26,7 @@ public class AdminController {
 	private UserService userService;
 	
 	@PreAuthorize("hasRole('ADMIN')")
-	@RequestMapping("/user/apprvl.do")
+	@RequestMapping("/user/apprvl/list.do")
 	public String userList (Authentication authentication, Model model
 			, @RequestParam(required = false, defaultValue = "1") int page
 			, @RequestParam(required = false, defaultValue = "1") int startRange
@@ -44,7 +44,7 @@ public class AdminController {
 		
 		model.addAttribute("searchVo", searchVo);
 		model.addAttribute("users", users);
-		return "admin/user/apprvl";
+		return "admin/user/apprvl/list";
 	}
 	
 	
