@@ -60,7 +60,7 @@
 	<select id="findByApprvlN" resultType="com.kt.totaleyes.vo.UserVo">
 		select
 			a.user_id, a.user_nm, a.user_email, a.user_cntct_no, a.mstr_yn, to_char(a.created_tm, 'yyyy-mm-dd hh24:mi:ss') as created_tm 
-			, b.biz_nm, b.biz_no, b.ceo_nm, b.biz_cndt, biz_type, b.agnt_nm, b.agnt_email, b.agnt_email, b.apprvl_yn as bizApprvlYn
+			, b.biz_seq, b.biz_nm, b.biz_no, b.ceo_nm, b.biz_cndt, biz_type, b.agnt_nm, b.agnt_email, b.agnt_email, b.apprvl_yn as bizApprvlYn
 		from
 			tbl_user_info a
 			left outer join tbl_biz_info b on a.biz_seq = b.biz_seq and b.del_yn = 'N'
@@ -74,5 +74,69 @@
 		order by created_tm desc
 		limit #{listSize} offset #{startList}
 	</select>
+	
+	<select id="findById" parameterType="String" resultType="com.kt.totaleyes.vo.UserVo">
+		select
+			a.user_id, a.user_nm, a.user_email, a.user_cntct_no, a.mstr_yn, a.apprvl_yn, to_char(a.created_tm, 'yyyy-mm-dd hh24:mi:ss') as created_tm 
+			, b.biz_nm, b.biz_no, b.ceo_nm, b.biz_cndt, biz_type, b.agnt_nm, b.agnt_email, b.agnt_email, b.apprvl_yn as bizApprvlYn
+		from
+			tbl_user_info a
+			left outer join tbl_biz_info b on a.biz_seq = b.biz_seq and b.del_yn = 'N'
+		where
+			a.del_yn = 'N'
+		and a.user_id = #{userId}
+	</select>
+	
+	<update id="updateForApprvl">
+		update
+			tbl_user_info
+		set
+			apprvl_yn = 'Y'
+			, updated_by = #{updatedBy}
+			, updated_tm = current_timestamp
+		where
+			user_id = #{userId}
+		and del_yn = 'N'
+	</update>
+	
+	<update id="updateForBizApprvl">
+		update
+			tbl_biz_info
+		set
+			apprvl_yn = 'Y'
+			, updated_by = #{updatedBy}
+			, updated_tm = current_timestamp
+		where
+			biz_no = #{biz_no}
+		and del_yn = 'N'
+	</update>
+	
+	<update id="deleteById">
+		update
+			tbl_user_info
+		set
+			del_yn = 'Y'
+		where
+			user_id = #{userId}
+	</update>
+	
+	<update id="deleteByBizSeq">
+		update
+			tbl_user_info
+		set
+			del_yn = 'Y'
+		where
+			biz_seq = #{bizSeq}
+	</update>
+	
+	<update id="deleteBizById">
+		update
+			tbl_biz_info
+		set
+			del_yn = 'Y'
+		where
+			biz_seq = #{bizSeq}
+	</update>
+	
 	
 </mapper>

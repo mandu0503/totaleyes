@@ -3,6 +3,7 @@ package com.kt.totaleyes.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.kt.totaleyes.common.SearchVo;
 import com.kt.totaleyes.vo.UserVo;
@@ -18,4 +19,12 @@ public interface UserMapper {
 
 	public int countByApprvlN(SearchVo searchVo);
 	public List<UserVo> findByApprvlN(SearchVo searchVo);
+	
+	public UserVo findById(String userId);
+	public int updateForApprvl(@Param("userId") String userId, @Param("updatedBy") String updatedBy);
+	public int updateForBizApprvl(@Param("bizNo") String bizNo, @Param("updatedBy") String updatedBy);
+	
+	public int deleteById(String userId);
+	public int deleteByBizSeq(Integer bizSeq);
+	public int deleteBizById(Integer bizSeq);
 }
