@@ -32,9 +32,11 @@ public class AuthProvider implements AuthenticationProvider{
 			throw new BadCredentialsException("비밀 번호가 틀립니다.");
 		}
 		
+		/* 차후 관리자 3개의 권한을 부여시 수정필요
 		List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
-        return new UsernamePasswordAuthenticationToken(user, null, grantedAuthorityList);
+        */
+        return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 	}
 
 	@Override
