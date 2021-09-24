@@ -9,7 +9,7 @@ public class Pagenation implements Serializable{
 	//초기값으로 목록개수를 10으로 셋팅
 	private int listSize = 10;                
 	//초기값으로 페이지범위를 10으로 셋팅
-	private int RangeSize = 10;    
+	private int rangeSize = 10;    
 	//현재 페이지
 	private int page;
 	//각 페이지 범위 시작 번호
@@ -24,7 +24,7 @@ public class Pagenation implements Serializable{
 	private boolean next;
 	
 	public int getRangeSize() {
-		return RangeSize;
+		return rangeSize;
 	}
 
 	public int getPage() {
@@ -105,10 +105,10 @@ public class Pagenation implements Serializable{
 		this.pageCnt = (int) Math.ceil((float)totCnt/listSize);
 		
 		//시작 페이지
-		this.startPage = (startRange - 1) * RangeSize + 1 ;
+		this.startPage = (startRange - 1) * rangeSize + 1 ;
 		
 		//끝 페이지
-		this.endPage = startRange * RangeSize;
+		this.endPage = startRange * rangeSize;
 			
 		//게시판 시작번호
 		this.startList = (page - 1) * listSize;
