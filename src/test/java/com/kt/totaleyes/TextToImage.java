@@ -44,8 +44,8 @@ public class TextToImage {
         int leftMargin = 16;
         int startline = 99;
         int fontSize = 16;
-        String fontFamily = "¹ÙÅÁ";
-        int errorline = 2; // ¿¡·¯ À§Ä¡
+        String fontFamily = "ë°”íƒ•";
+        int errorline = 2; // ì—ëŸ¬ ìœ„ì¹˜
                 
         String text = 
         "clients.inMemory()\n" +
@@ -67,7 +67,7 @@ public class TextToImage {
 
         int i=0;
         for(String str: temps) {
-            int size = 60; // ÇÑ ¶óÀÎ¿¡ Ç¥½ÃµÉ »çÀÌÁî
+            int size = 60; // í•œ ë¼ì¸ì— í‘œì‹œë  ì‚¬ì´ì¦ˆ
             boolean error = false;
             if (i == errorline) {
                 error = true;
