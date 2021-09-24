@@ -3,15 +3,15 @@ CREATE EXTENSION pgcrypto;
 
 
 
-insert into tbl_user_info(user_id, pwd, user_role, user_nm, user_email, user_cntct_no, created_tm, created_by, updated_tm, updated_by)
-values ('admin', crypt('1234', gen_salt('MD5')), 'ROLE_ADMIN', '관리자','totaleyes@kdcs.co.kr', '010-0000-0000', current_timestamp, 'init', current_timestamp, 'init');
+insert into tbl_user_info(user_id, pwd, user_role, user_nm, user_email, user_cntct_no, apprvl_yn, created_tm, created_by, updated_tm, updated_by)
+values ('admin', crypt('1234', gen_salt('MD5')), 'ROLE_ADMIN', '관리자','totaleyes@kdcs.co.kr', '010-0000-0000', 'Y', current_timestamp, 'init', current_timestamp, 'init');
 
-insert into tbl_user_info(user_id, pwd, user_role, user_nm, user_email, user_cntct_no, created_tm, created_by, updated_tm, updated_by)
-values ('user', crypt('1234', gen_salt('MD5')), 'ROLE_USER', '사용자','totaleyes-user@kdcs.co.kr', '010-0000-0001', current_timestamp, 'init', current_timestamp, 'init');
-
-
-insert into tbl_user_info(user_id, pwd, user_role, user_nm, user_email, user_cntct_no, created_tm, created_by, updated_tm, updated_by)
-values ('checker', crypt('1234', gen_salt('MD5')), 'ROLE_INSPECTOR', '점검자','totaleyes-inspector@kdcs.co.kr', '010-0000-0002', current_timestamp, 'init', current_timestamp, 'init');
+-- 테스트
+insert into tbl_user_info(user_id, pwd, user_role, user_nm, user_email, user_cntct_no, apprvl_yn, created_tm, created_by, updated_tm, updated_by)
+values ('user', crypt('1234', gen_salt('MD5')), 'ROLE_USER', '사용자','totaleyes-user@kdcs.co.kr', '010-0000-0001', 'Y', current_timestamp, 'init', current_timestamp, 'init');
+-- 테스트
+insert into tbl_user_info(user_id, pwd, user_role, user_nm, user_email, user_cntct_no, apprvl_yn, created_tm, created_by, updated_tm, updated_by)
+values ('checker', crypt('1234', gen_salt('MD5')), 'ROLE_INSPECTOR', '점검자','totaleyes-inspector@kdcs.co.kr', '010-0000-0002', 'Y', current_timestamp, 'init', current_timestamp, 'init');
 
 
 
