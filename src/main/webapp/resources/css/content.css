@@ -1,7 +1,7 @@
 ﻿@charset "UTF-8";
 
 
-html{overflow-y: auto;}
+/*html{overflow-y: auto;}*/
 
 
 #wrap{width: 100%;}
@@ -134,7 +134,7 @@ footer .footer .menu li a:hover{color: #1c83ed;}
 
 .tit__section .tit__section__info li:nth-child(1n+2){padding-left: 20px;}
 
-.tit__section .tit__section__info li:nth-child(1n+2)::after{content: ''; display: block; position: absolute; top: 2px; left: 7px; width: 6px; height: 11px; background: url('../img/ico-lnb.png') no-repeat center;}
+.tit__section .tit__section__info li:nth-child(1n+2)::after{content: ''; display: block; position: absolute; top: 2px; left: 7px; width: 6px; height: 13px; background: url('../img/ico-lnb.png') no-repeat center 2px;}
 
 .tit__section .tit__section__info li:last-child{color: #575757; font-weight: 700;}
 

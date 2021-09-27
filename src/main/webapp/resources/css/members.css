@@ -151,3 +151,6 @@
 .wrap__join__complete h3{font-size: 20px; text-align: center; line-height: 1;}
 
 .wrap__join__complete button{width: 360px;}
+
+
+.container__join__complete{position: fixed; width: 780px; background: #fff; z-index: 1100; box-sizing: border-box; top: 50%; left: 50%; display: none; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);}
