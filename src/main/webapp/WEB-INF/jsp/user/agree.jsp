@@ -1,27 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/include/taglib.jsp"%>
 <!doctype html>
 <html lang="ko">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Total Eyes</title>
-	
-	<link rel="stylesheet" href="../../../resources/css/style.css" />
-
-	<script src="../../../resources/js/lib/jquery-3.5.1.min.js"></script>
-	<script src="../../../resources/js/lib/jquery-ui.js"></script>
-	<script src="../../../resources/js/common.ui.js"></script>
+	<%@include file="/WEB-INF/jsp/include/head.jsp"%>
 
 <script>
-
 $(document).ready(function(){
-// ready function -->
+	// ready function -->
 
-
-// 동의 전체 체크
-$(function(){	
-	$(document).on('click','.agree__chkall',function(){
+	// 동의 전체 체크
+	$('.agree__chkall').on('click', function(){
 		var target = $(this).attr('name');
 		
 		if($(this).prop('checked')){
@@ -31,7 +20,7 @@ $(function(){
 		}
 	});	
 	
-	$(document).on('click','.agree__chksub',function(){
+	$('.agree__chksub').on('click',function(){
 		var targetSub = $(this).attr('name');
 		var targetNum = $(this).parents('.join__form').find('.agree__chksub').length;
 		var targetChkNum = $(this).parents('.join__form').find('.agree__chksub:checked').length;
@@ -42,12 +31,9 @@ $(function(){
 			$('.'+targetSub).prop('checked',false);
 		}
 	});	
-});
-
-
-// 동의 체크 여부
-$(function(){
-	$(document).on('click','.btn__required__input',function() {
+	
+	// 동의 체크 여부
+	$('.btn__required__input').on('click',function() {
 		var inputObjs1 = $('.required__input__chk1');
 		var inputObjs2 = $('.required__input__chk2');
 		var bEmpty = true;
@@ -55,12 +41,12 @@ $(function(){
 		inputObjs2.each(function(index){
 			if($(this).is(':checked') == false){
 				bEmpty = false;
-
+	
 				$('.pop__msg, .pop--overlay').fadeIn('fast');
 				$('body').css('overflow','hidden');
 				$('.pop__msg .btn__pop--cancel').hide();
 				$('.pop__msg .wrap__pop__msg').html('개인정보 수집, 이용에<br/>동의해 주시길 바랍니다.');
-
+	
 				return false;
 			}
 		});
@@ -68,22 +54,22 @@ $(function(){
 		inputObjs1.each(function(index){
 			if($(this).is(':checked') == false){
 				bEmpty = false;
-
+	
 				$('.pop__msg, .pop--overlay').fadeIn('fast');
 				$('body').css('overflow','hidden');
 				$('.pop__msg .btn__pop--cancel').hide();
 				$('.pop__msg .wrap__pop__msg').html('이용약관에<br/>동의해 주시길 바랍니다.');
-
+	
 				return false;
 			}
 		});
-
+	
 		if(!bEmpty) return;
-
 		// 동의
+		
+		location.href="/user/register.do";
+		
 	});
-});
-
 
 // <-- ready function
 });
@@ -178,20 +164,7 @@ $(function(){
 	</div>
 
 	<!-- 공통 footer -->
-	<footer>
-		<div class="footer">
-			<div class="copy">
-				(06707) 서울 서초구 효령로 176, 02-523-7029<br/>
-				COPYRIGHT 2021 kt ds ALL RIGHT RESERVED
-			</div>
-			
-			<ul class="menu">
-				<li><a href="#">개인정보처리방침</a></li>
-				<li><a href="#">이용약관</a></li>
-				<li><a href="#">FAQ</a></li>
-			</ul>
-		</div>
-	</footer>
+	<%@include file="/WEB-INF/jsp/include/footer.jsp"%>
 	<!--// 공통 footer -->
 
 </div>
