@@ -1,4 +1,6 @@
 
+jQuery.ajaxSetup({cache: false});
+
 function isEmpty(str) {
 	if (str == null || cmmTrim(str) == "" || typeof str == 'undefined') {
 		return true;
@@ -20,3 +22,13 @@ function cmmTrim(str) {
 	}
 	return ((st > 0) || (len < str.length)) ? str.substring(st, len) : str;
 }
+
+
+$(document).ready(function(){
+	$(".number").on("keyup", function(e){
+		if (!(e.keyCode >= 37 && e.keyCode <= 40)){
+			$(this).val($(this).val().replace(/[^0-9]/gi,""));
+		}
+	});
+});
+

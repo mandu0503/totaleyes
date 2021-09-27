@@ -10,3 +10,4 @@
 <script src="/resources/js/lib/jquery-3.6.0.min.js"></script>
 <script src="/resources/js/lib/jquery-ui.js"></script>
 <script src="/resources/js/common.ui.js"></script>
+<script src="/resources/js/common.form.js"></script>
