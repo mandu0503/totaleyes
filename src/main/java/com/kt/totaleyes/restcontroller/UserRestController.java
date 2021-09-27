@@ -40,6 +40,24 @@ public class UserRestController {
 	}
 	
 	/**
+	 * 사용자 id 중복 체크
+	 * @param message
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("/checkId.do")
+	public GenericMessage checkId (GenericMessage message, @RequestParam(name = "userId", defaultValue = "") String userId) {
+		
+		log.debug("** userId:{}", userId);
+		
+		int count = userService.countById(userId);
+		
+		message.setReturn(ReturnCode.OK);
+		message.setData(count);
+		return message;
+	}
+	
+	/**
 	 * 사업자 번호 중복 체크
 	 * @param message
 	 * @param bizNo
@@ -53,9 +71,9 @@ public class UserRestController {
 		int count = -1;
 		
 		if (StringUtils.equals(Const.YES, mstrYn)) {
-			count = userService.findByBizNo(bizNo);
+			count = userService.countByBizNo(bizNo);
 		} else if (StringUtils.equals(Const.NO, mstrYn)) {
-			count = userService.findByBizNoAndApprvlY(bizNo);
+			count = userService.countByBizNoAndApprvlY(bizNo);
 		}
 		
 		message.setReturn(ReturnCode.OK);

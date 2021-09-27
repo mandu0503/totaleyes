@@ -11,8 +11,9 @@ import com.kt.totaleyes.vo.UserVo;
 @Mapper
 public interface UserMapper {
 
-	public int findByBizNo (String bizNo);
-	public int findByBizNoAndApprvlY (String bizNo);
+	public int countById(String userId);
+	public int countByBizNo (String bizNo);
+	public int countByBizNoAndApprvlY (String bizNo);
 	public int createBiz (UserVo userVo);
 	public int createBizUser (UserVo userVo);
 	public int createUser(UserVo userVo);

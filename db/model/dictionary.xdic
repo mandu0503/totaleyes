@@ -66,4 +66,5 @@
   <term name="메뉴" physicalName="menu"/>
   <term name="검토" physicalName="review"/>
   <term name="사이즈" physicalName="size"/>
+  <term name="그룹" physicalName="grp"/>
 </tm:TermDictionary>

@@ -3,7 +3,14 @@
 
 <mapper namespace="com.kt.totaleyes.mapper.UserMapper">
 
-	<select id="findByBizNo" parameterType="String" resultType="Integer">
+	<select id="countById" parameterType="String" resultType="Integer">
+		select count(*)
+		from tbl_user_info
+		where
+			user_id = #{userId}
+	</select>
+	
+	<select id="countByBizNo" parameterType="String" resultType="Integer">
 		select count(*)
 		from tbl_biz_info
 		where
@@ -11,7 +18,7 @@
 		and del_yn = 'N'
 	</select>
 	
-	<select id="findByBizNoAndApprvlY" resultType="Integer">
+	<select id="countByBizNoAndApprvlY" resultType="Integer">
 		select count(*)
 		from tbl_biz_info
 		where
