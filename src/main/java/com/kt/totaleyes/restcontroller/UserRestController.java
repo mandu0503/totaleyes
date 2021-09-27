@@ -33,9 +33,10 @@ public class UserRestController {
 		
 		log.debug("** userVo:{}", userVo);
 		
-		userService.createUser(userVo);
+		boolean result = userService.createUser(userVo);
 		
 		message.setReturn(ReturnCode.OK);
+		message.setData(result);
 		return message;
 	}
 	
@@ -66,15 +67,28 @@ public class UserRestController {
 	 */
 	@RequestMapping("/checkBizNo.do")
 	public GenericMessage checkBizNo (GenericMessage message, @RequestParam(name = "bizNo", defaultValue = "") String bizNo,
-			@RequestParam(name = "mstrYn", defaultValue = "") String mstrYn) {
+			@RequestParam(name = "bizNm", defaultValue = "") String bizNm) {
 		
-		int count = -1;
+		int count = userService.countByBizNo(bizNo);
 		
-		if (StringUtils.equals(Const.YES, mstrYn)) {
-			count = userService.countByBizNo(bizNo);
-		} else if (StringUtils.equals(Const.NO, mstrYn)) {
-			count = userService.countByBizNoAndApprvlY(bizNo);
-		}
+		message.setReturn(ReturnCode.OK);
+		message.setData(count);
+		
+		return message;
+	}
+	
+	/**
+	 * 사업자 일련번호 조회
+	 * @param message
+	 * @param bizNo
+	 * @param mstrYn
+	 * @return
+	 */
+	@RequestMapping("/findBizSeq.do")
+	public GenericMessage findBizSeq (GenericMessage message, @RequestParam(name = "bizNo", defaultValue = "") String bizNo,
+			@RequestParam(name = "bizNm", defaultValue = "") String bizNm) {
+		
+		int count = userService.findBizSeqByBizNoAndApprvlY(bizNo, bizNm);
 		
 		message.setReturn(ReturnCode.OK);
 		message.setData(count);

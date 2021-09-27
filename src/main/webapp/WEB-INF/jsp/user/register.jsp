@@ -107,6 +107,34 @@ $(document).ready(function() {
 				alert('담당자명 연락처를 입력하세요.');
 				return false;
 			}
+			
+			// 사업자 등록번호 중복확인
+			$.ajax({
+				url: '/api/user/checkBizNo.do',
+				type: 'post',
+				data: {bizNo: bizNo, '${_csrf.parameterName}' : '${_csrf.token}'},
+				dataType: 'json',
+				async: false,
+				// beforeSend: function(xhr, opts) {
+				//	loading_start();
+				// },
+				success: function(res) {
+				//	loading_finish();
+					if (res.returnCode == '0000') {
+						if (res.data === 0) {
+							register();
+						} else {
+							alert('사용자 ID가 중복되었습니다.');
+						}
+					} else {
+		 				alert(data.message);
+					}
+				},
+				error: function(error) {
+		//			loading_finish();
+					alert('서비스가 원활하지 않습니다. 잠시 후 다시 시도하세요.');
+				}
+			});
 		}
 		
 		if ($('#mstrYn').val() === 'N') {

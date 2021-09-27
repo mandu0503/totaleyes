@@ -9,7 +9,7 @@ public interface UserService {
 
 	public int countById (String userId);
 	public int countByBizNo (String bizNo);
-	public int countByBizNoAndApprvlY (String bizNo);
+	public int findBizSeqByBizNoAndApprvlY (String bizNo, String bizNm);
 	public boolean createUser(UserVo userVo);
 
 	public int countByApprvlN(SearchVo searchVo);

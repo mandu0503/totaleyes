@@ -18,11 +18,22 @@
 		and del_yn = 'N'
 	</select>
 	
+	<select id="findBizSeqByBizNoAndApprvlY" resultType="Integer">
+		select biz_seq
+		from tbl_biz_info
+		where
+			biz_no = #{bizNo}
+		and biz_nm = #{bizNm}
+		and del_yn = 'N'
+		and apprvl_yn = 'Y'
+	</select>
+	
 	<select id="countByBizNoAndApprvlY" resultType="Integer">
 		select count(*)
 		from tbl_biz_info
 		where
-			biz_no = #{bizNo}
+			biz_seq = #{bizSeq}
+		and biz_no = #{bizNo}
 		and del_yn = 'N'
 		and apprvl_yn = 'Y'
 	</select>

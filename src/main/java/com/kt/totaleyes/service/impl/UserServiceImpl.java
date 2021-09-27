@@ -32,9 +32,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int countByBizNoAndApprvlY(String bizNo) {
+	public int findBizSeqByBizNoAndApprvlY(String bizNo, String bizNm) {
 		// TODO Auto-generated method stub
-		return userMapper.countByBizNoAndApprvlY(bizNo);
+		return userMapper.findBizSeqByBizNoAndApprvlY(bizNo, bizNm);
 	}
 
 	@Override
@@ -42,13 +42,19 @@ public class UserServiceImpl implements UserService {
 	public boolean createUser(UserVo userVo) {
 		// TODO Auto-generated method stub
 		
-		if (StringUtils.equals(Const.YES, userVo.getMstrYn()) && StringUtils.isNotEmpty(userVo.getBizNo()) 
-				&& userMapper.countByBizNo(userVo.getBizNo()) == 0) {
-			userMapper.createBiz(userVo);
-			userMapper.createBizUser(userVo);
-		} else if (StringUtils.equals(Const.NO, userVo.getMstrYn()) && userVo.getBizSeq() != null && userVo.getBizSeq() > 0
-				&& userMapper.countByBizNoAndApprvlY(userVo.getBizNm()) == 0) {
-			userMapper.createBizUser(userVo);
+		if (StringUtils.equals(Const.YES, userVo.getMstrYn())) {
+			if (StringUtils.isNotEmpty(userVo.getBizNo()) && userMapper.countByBizNo(userVo.getBizNo()) == 0) {
+				userMapper.createBiz(userVo);
+				userMapper.createBizUser(userVo);
+			} else {
+				return false;
+			}
+		} else if (StringUtils.equals(Const.NO, userVo.getMstrYn())) {
+			if (userVo.getBizSeq() != null && userVo.getBizSeq() > 0 && userMapper.countByBizNoAndApprvlY(userVo.getBizSeq(), userVo.getBizNo()) > 0) {
+				userMapper.createBizUser(userVo);
+			} else {
+				return false;
+			}
 		} else if (StringUtils.isEmpty(userVo.getMstrYn())) {
 			userMapper.createUser(userVo);
 		} else {
