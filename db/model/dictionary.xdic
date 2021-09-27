@@ -31,8 +31,12 @@
   <term name="사용자" physicalName="user"/>
   <term name="요청" description="REQUEST" physicalName="req"/>
   <term name="상태" physicalName="status"/>
-  <term name="검사자" physicalName="checker"/>
-  <term name="검사" physicalName="check"/>
+  <term name="검사자" physicalName="inspctr">
+    <synonyms>진단자</synonyms>
+  </term>
+  <term name="검사" physicalName="inspctn">
+    <synonyms>진단</synonyms>
+  </term>
   <term name="설명" physicalName="desc">
     <synonyms>내용</synonyms>
   </term>
@@ -40,4 +44,26 @@
   <term name="승인" physicalName="apprvl"/>
   <term name="삭제" physicalName="del"/>
   <term name="결과" description="RESULT" physicalName="rslt"/>
+  <term name="상세" physicalName="dtl"/>
+  <term name="유형" physicalName="type"/>
+  <term name="서비스" physicalName="srvc"/>
+  <term name="url" physicalName="url"/>
+  <term name="ip" physicalName="ip"/>
+  <term name="port" physicalName="port"/>
+  <term name="프레임워크" physicalName="framework"/>
+  <term name="was" physicalName="was"/>
+  <term name="cms" physicalName="cms"/>
+  <term name="dbms" physicalName="dbms"/>
+  <term name="기타" physicalName="etc"/>
+  <term name="외부" physicalName="extnl"/>
+  <term name="연동" physicalName="link"/>
+  <term name="프로토콜" physicalName="protocol"/>
+  <term name="경로" physicalName="path"/>
+  <term name="cms" physicalName="cms"/>
+  <term name="첨부" physicalName="attch"/>
+  <term name="파일" physicalName="file"/>
+  <term name="경로" physicalName="path"/>
+  <term name="메뉴" physicalName="menu"/>
+  <term name="검토" physicalName="review"/>
+  <term name="사이즈" physicalName="size"/>
 </tm:TermDictionary>
