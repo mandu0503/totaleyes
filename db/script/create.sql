@@ -51,8 +51,8 @@ CREATE TABLE "totaleyes"."tbl_biz_info"
 	"biz_nm"        VARCHAR(128) NULL,     -- 회사_명
 	"biz_no"        VARCHAR(10)  NULL,     -- 사업자_번호
 	"ceo_nm"        VARCHAR(128) NULL,     -- 대표자_명
-	"biz_cndt"      VARCHAR(128) NULL,     -- 업태
-	"biz_type"      VARCHAR(128) NULL,     -- 업종
+	"biz_cndt"      VARCHAR(256) NULL,     -- 업태
+	"biz_type"      VARCHAR(256) NULL,     -- 업종
 	"agnt_nm"       VARCHAR(128) NULL,     -- 담당자_명
 	"agnt_email"    VARCHAR(128) NULL,     -- 담당자_이메일
 	"agnt_cntct_no" VARCHAR(32)  NULL,     -- 담당자_연락처_번호
