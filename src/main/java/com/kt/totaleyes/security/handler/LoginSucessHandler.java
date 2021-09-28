@@ -20,25 +20,7 @@ public class LoginSucessHandler extends SavedRequestAwareAuthenticationSuccessHa
 	@Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws ServletException, IOException {
-	 	/* 
-        response.setStatus(HttpServletResponse.SC_OK);
-        // 성공 시 response를 json형태로 반환
-        response.getWriter().print("{\"success\": true}");
-        response.getWriter().flush();
-        */
-
-	 	/*
-		setDefaultTargetUrl("/");
-        SavedRequest savedRequest = requestCache.getRequest(request,response);
-        if(savedRequest != null){
-            // 인증 받기 전 url로 이동하기
-            String targetUrl = savedRequest.getRedirectUrl();
-            redirectStrategy.sendRedirect(request,response,targetUrl);
-        }else{
-            // 기본 url로 가도록 함함
-           redirectStrategy.sendRedirect(request,response,getDefaultTargetUrl());
-        }
-	 	*/
-		super.onAuthenticationSuccess(request, response, authentication);
+		// 이전 페이지상관없이 기본 url 로 이동
+		getRedirectStrategy().sendRedirect(request, response, getDefaultTargetUrl());
     }
 }
