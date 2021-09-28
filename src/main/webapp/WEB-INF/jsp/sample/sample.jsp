@@ -59,7 +59,7 @@ function fn_search(page, startRange){
 }
 function fn_restSample(){
 	$.ajax({
-	    url:'/rest/sample.do',
+	    url:'/rest/sample1.do',
 	    type:'post',
 	    dataType: 'json',
 	    data: {
@@ -67,8 +67,10 @@ function fn_restSample(){
 	    	'type' : 'type'
 	    },
 	    success:function(data){
-	    	console.log(data);
-	    }
+	    	if(data.returnCode == '9000'){
+	    		alert(data.message);	
+	    	}
+	    }	    
 	});
 }
 </script>

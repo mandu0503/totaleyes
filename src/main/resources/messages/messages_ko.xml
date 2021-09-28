@@ -5,4 +5,5 @@
     <entry key="NG">오류</entry>
     <entry key="0000">정상적으로 처리되었습니다.</entry>
     <entry key="0001">에러가 발생하였습니다.</entry>
+    <entry key="9000">권한이 없습니다.</entry>
 </properties>
