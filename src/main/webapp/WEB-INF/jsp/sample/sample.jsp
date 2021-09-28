@@ -57,6 +57,24 @@ function fn_search(page, startRange){
 	    }
 	});
 }
+function fn_pageGo(page){
+	var searchType = $("#searchType").val();
+	var searchNm = $("#searchNm").val();
+	$.ajax({
+	    url:'/getSampleList.do',
+	    type:'post',
+	    dataType: 'html',
+	    data: {
+	    	'${_csrf.parameterName}' : '${_csrf.token}',
+	    	'page' : page,
+	    	'searchType' : searchType,
+	    	'searchNm' : searchNm
+	    },
+	    success:function(data){
+	    	$("#listDiv").html(data);
+	    }
+	});
+}
 function fn_restSample(){
 	$.ajax({
 	    url:'/rest/sample1.do',

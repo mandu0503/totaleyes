@@ -12,8 +12,6 @@ public class Pagenation implements Serializable{
 	private int rangeSize = 10;    
 	//현재 페이지
 	private int page;
-	//각 페이지 범위 시작 번호
-	private int startRange;
 	//총카운트
 	private int totCnt;
 	private int pageCnt;
@@ -34,15 +32,6 @@ public class Pagenation implements Serializable{
 	public void setPage(int page) {
 		this.page = page;
 	}
-
-	public int getStartRange() {
-		return startRange;
-	}
-
-	public void setStartRange(int startRange) {
-		this.startRange = startRange;
-	}
-
 
 	public int getStartPage() {
 		return startPage;
@@ -95,7 +84,32 @@ public class Pagenation implements Serializable{
 	public int getStartList() {
 		return startList;
 	}
-
+	public void pageInfo(int page, int totCnt) {
+		this.page = page;
+		this.totCnt = totCnt;
+		
+		//전체 페이지수 
+		this.pageCnt = (int) Math.ceil((float)totCnt/listSize);
+				
+		//끝 페이지
+		this.endPage = ((int) Math.ceil((float)page/this.rangeSize)) * this.rangeSize;
+		//시작 페이지
+		this.startPage = this.endPage - (this.rangeSize - 1);
+		
+		//게시판 시작번호
+		this.startList = (page - 1) * listSize;
+		
+		//이전 버튼 상태
+		this.prev = this.startPage == 1 ? false : true;
+		
+		//다음 버튼 상태
+		this.next = endPage > pageCnt ? false : true;
+		if (this.endPage > this.pageCnt) {
+			this.endPage = this.pageCnt;
+			this.next = false;
+		}
+	}
+	/*
 	public void pageInfo(int page, int startRange, int totCnt) {
 		this.page = page;
 		this.startRange = startRange;
@@ -111,7 +125,7 @@ public class Pagenation implements Serializable{
 		this.endPage = startRange * rangeSize;
 			
 		//게시판 시작번호
-		this.startList = (page - 1) * listSize;
+		//this.startList = (page - 1) * listSize;
 		
 		//이전 버튼 상태
 		this.prev = startRange == 1 ? false : true;
@@ -123,4 +137,5 @@ public class Pagenation implements Serializable{
 			this.next = false;
 		}
 	}
+	*/
 }

@@ -45,7 +45,7 @@ public class SampleController {
 		searchVo.setSearchNm(searchNm);
 		
 		int tot = sampleService.getBoardInfoCount(searchVo);		
-		searchVo.pageInfo(page, startRange, tot);
+		searchVo.pageInfo(page, tot);
 		
 		List<SampleVo> sampleVoList = sampleService.getBoardInfoList(searchVo);
 		

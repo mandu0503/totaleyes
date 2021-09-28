@@ -21,14 +21,14 @@
 </div>
 <div>
 	<c:if test="${searchVo.prev}">
-		<a href="#" onClick="fn_prev('${searchVo.page}', '${searchVo.startRange}', '${searchVo.rangeSize}')">Previous</a>
+		<a href="#" onClick="fn_pageGo('${searchVo.startPage - searchVo.rangeSize}')">Previous</a>
 	</c:if>
 		
 	<c:forEach begin="${searchVo.startPage}" end="${searchVo.endPage}" var="idx">
-		<a href="#" onClick="fn_pagenation('${idx}', '${searchVo.startRange}', '${searchVo.rangeSize}')"> ${idx} </a>
+		<a href="#" onClick="fn_pageGo('${idx}')"> ${idx} </a>
 	</c:forEach>
 		
 	<c:if test="${searchVo.next}">
-		<a href="#" onClick="fn_next('${searchVo.page}', '${searchVo.startRange}', '${searchVo.rangeSize}')" >Next</a>
+		<a href="#" onClick="fn_pageGo('${searchVo.endPage + 1}')" >Next</a>
 	</c:if>
 </div>

@@ -48,7 +48,7 @@ public class AdminController {
 		searchVo.setSearchNm(searchNm);
 		
 		int tot = userService.countByApprvlN(searchVo);		
-		searchVo.pageInfo(page, startRange, tot);
+		searchVo.pageInfo(page, tot);
 		
 		List<UserVo> users = userService.findByApprvlN(searchVo);
 		
