@@ -60,7 +60,7 @@ function fn_login(){
 				<div class="login__util">
 					<a>아이디찾기</a>
 					<a>비밀번호분실</a>
-					<a>회원가입</a>
+					<a href="/user/agree.do">회원가입</a>
 				</div>
 			</div>
 		</div>
