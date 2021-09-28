@@ -4,6 +4,7 @@ public enum ReturnCode {
 	
 	OK("0000"),
 	NG("0001"),
+	DENIED("9000")
 	;
 	    
 	private String code;
