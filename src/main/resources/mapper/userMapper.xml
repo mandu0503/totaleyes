@@ -95,7 +95,7 @@
 	
 	<select id="findById" parameterType="String" resultType="com.kt.totaleyes.vo.UserVo">
 		select
-			a.user_id, a.user_nm, a.user_email, a.user_cntct_no, a.mstr_yn, a.apprvl_yn, to_char(a.created_tm, 'yyyy-mm-dd hh24:mi:ss') as created_tm 
+			a.user_id, a.user_nm, a.user_email, a.user_cntct_no, a.biz_seq, a.mstr_yn, a.apprvl_yn, to_char(a.created_tm, 'yyyy-mm-dd hh24:mi:ss') as created_tm 
 			, b.biz_nm, b.biz_no, b.ceo_nm, b.biz_cndt, biz_type, b.agnt_nm, b.agnt_email, b.agnt_email, b.apprvl_yn as bizApprvlYn
 		from
 			tbl_user_info a
@@ -110,6 +110,7 @@
 			tbl_user_info
 		set
 			apprvl_yn = 'Y'
+			, apprvl_tm = current_timestamp
 			, updated_by = #{updatedBy}
 			, updated_tm = current_timestamp
 		where
@@ -122,6 +123,7 @@
 			tbl_biz_info
 		set
 			apprvl_yn = 'Y'
+			, apprvl_tm = current_timestamp
 			, updated_by = #{updatedBy}
 			, updated_tm = current_timestamp
 		where

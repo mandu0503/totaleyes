@@ -1,8 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>     
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/include/taglib.jsp"%>
+<!doctype html>
+<html lang="ko">
+<head>
+	<%@include file="/WEB-INF/jsp/include/head.jsp"%>
 
-<div>
+<script>
+
+$(document).ready(function() {
+	$('#btn_apprvl').on('click', function() {
+		let userId = 'topeyes1';
+		
+		$.ajax({
+			url: '/api/admin/user/apprvl.do',
+			type: 'post',
+			data: {userId: userId, '${_csrf.parameterName}': '${_csrf.token}'},
+			dataType: 'json',
+			async: false,
+			// beforeSend: function(xhr, opts) {
+			//	loading_start();
+			// },
+			success: function(res) {
+			//	loading_finish();
+				if (res.returnCode == '0000') {
+					alert('승인이 되었습니다.');
+				} else {
+	 				alert(res.message);
+				}
+			},
+			error: function(error) {
+	//			loading_finish();
+				alert('서비스가 원활하지 않습니다. 잠시 후 다시 시도하세요.');
+			}
+		});
+	});
+});
+
+
+</script>
+</head>
+<body>
+<div id="wrap"> 
 	<table>
 	<tr>
 		<th>번호</th>
@@ -23,7 +61,6 @@
 		</tr>
 	</c:forEach>
 	</table>
-</div>
 	<c:if test="${searchVo.prev}">
 		<a href="#" onClick="fn_prev('${searchVo.page}', '${searchVo.startRange}', '${searchVo.rangeSize}')">Previous</a>
 	</c:if>
@@ -35,4 +72,7 @@
 	<c:if test="${searchVo.next}">
 		<a href="#" onClick="fn_next('${searchVo.page}', '${searchVo.startRange}', '${searchVo.rangeSize}')" >Next</a>
 	</c:if>
+	<button id="btn_apprvl">승인</button>
 </div>
+	
+</body>
