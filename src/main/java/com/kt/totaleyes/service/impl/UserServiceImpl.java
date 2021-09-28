@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 		if (userVo != null && StringUtils.equals(Const.NO, userVo.getApprvlYn()) 
 				&& (userVo.getMstrYn() == null || StringUtils.equals(Const.YES, userVo.getMstrYn()))) {
 			if (StringUtils.equals(Const.YES, userVo.getMstrYn())) {
-				return userMapper.updateForBizApprvl(userVo.getBizSeq(), updatedBy);
+				userMapper.updateForBizApprvl(userVo.getBizSeq(), updatedBy);
 			}
 			return userMapper.updateForApprvl(userId, updatedBy);
 		}
