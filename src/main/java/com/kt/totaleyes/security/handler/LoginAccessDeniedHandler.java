@@ -27,7 +27,7 @@ public class LoginAccessDeniedHandler implements AccessDeniedHandler {
 		if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 			response.setStatus(HttpServletResponse.SC_OK);
 			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=UTF-8");
+			response.setContentType("application/json");
 			
 			String result = "{\"message\": \""+ messageSourceAccessor.getMessage(ReturnCode.DENIED.getCode()) +"\", \"returnCode\": \"" + ReturnCode.DENIED.getCode() + "\"}";
 			
