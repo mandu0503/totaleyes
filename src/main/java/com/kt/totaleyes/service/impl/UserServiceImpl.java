@@ -79,5 +79,22 @@ public class UserServiceImpl implements UserService {
 		return userMapper.findByApprvlN(searchVo);
 	}
 
+	@Override
+	public int updateApprovalById(String userId, String updatedBy) {
+		// TODO Auto-generated method stub
+		
+		UserVo userVo = userMapper.findById(userId);
+		
+		if (userVo != null && StringUtils.equals(Const.NO, userVo.getApprvlYn()) 
+				&& (userVo.getMstrYn() == null || StringUtils.equals(Const.YES, userVo.getMstrYn()))) {
+			if (StringUtils.equals(Const.YES, userVo.getMstrYn())) {
+				return userMapper.updateForBizApprvl(userVo.getBizSeq(), updatedBy);
+			}
+			return userMapper.updateForApprvl(userId, updatedBy);
+		}
+		
+		return 0;
+	}
+
 	
 }

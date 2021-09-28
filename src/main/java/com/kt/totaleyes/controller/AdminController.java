@@ -25,6 +25,16 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * 사용자 승인 대기 목록
+	 * @param authentication
+	 * @param model
+	 * @param page
+	 * @param startRange
+	 * @param searchType
+	 * @param searchNm
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping("/user/apprvl/list.do")
 	public String userList (Authentication authentication, Model model

@@ -85,7 +85,7 @@
 		where
 			a.del_yn = 'N'
 		and a.apprvl_yn = 'N'
-		and (a.mstr_yn ='Y' or a.mstr_yn is null)
+		and (a.mstr_yn = 'Y' or a.mstr_yn is null)
 		<if test='searchType == "name" and searchNm != null and searchNm != ""'>
 			and a.user_nm like '%' || #{searchNm} || '%'
 		</if>
@@ -125,7 +125,7 @@
 			, updated_by = #{updatedBy}
 			, updated_tm = current_timestamp
 		where
-			biz_no = #{biz_no}
+			biz_seq = #{bizSeq}
 		and del_yn = 'N'
 	</update>
 	

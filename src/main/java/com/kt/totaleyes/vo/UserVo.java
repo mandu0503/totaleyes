@@ -22,6 +22,7 @@ public class UserVo implements Serializable {
 	private String userCntctNo;
 	private String userRole;
 	private String mstrYn;
+	private String apprvlYn;
 	private Integer bizSeq;
 	private String bizNm;
 	private String bizNo;
