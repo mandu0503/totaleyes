@@ -25,6 +25,13 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	@PreAuthorize("hasRole('ADMIN')")
+	@RequestMapping("/user/apprvl/list.do")
+	public String apprvlList (Authentication authentication) {
+		return "admin/user/apprvl/list";
+	}
+	
+	
 	/**
 	 * 사용자 승인 대기 목록
 	 * @param authentication
@@ -36,10 +43,9 @@ public class AdminController {
 	 * @return
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@RequestMapping("/user/apprvl/list.do")
-	public String userList (Authentication authentication, Model model
+	@RequestMapping("/user/apprvl/listItem.do")
+	public String apprvlListItem (Authentication authentication, Model model
 			, @RequestParam(required = false, defaultValue = "1") int page
-			, @RequestParam(required = false, defaultValue = "1") int startRange
 			, @RequestParam(required = false, defaultValue = "") String searchType
 			, @RequestParam(required = false, defaultValue = "") String searchNm) {
 		
@@ -54,7 +60,7 @@ public class AdminController {
 		
 		model.addAttribute("searchVo", searchVo);
 		model.addAttribute("users", users);
-		return "admin/user/apprvl/list";
+		return "admin/user/apprvl/listItem";
 	}
 	
 	
