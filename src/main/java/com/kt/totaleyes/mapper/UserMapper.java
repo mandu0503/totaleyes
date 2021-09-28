@@ -13,8 +13,8 @@ public interface UserMapper {
 
 	public int countById(String userId);
 	public int countByBizNo (String bizNo);
-	public int countByBizNoAndApprvlY (@Param("bizSeq")Integer bizSeq, @Param("bizNm")String bizNm);
-	public int findBizSeqByBizNoAndApprvlY (@Param("bizNo")String bizNo, @Param("bizNm")String bizNm);
+	public int countByBizNoAndApprvlY (@Param("bizSeq")Integer bizSeq, @Param("bizNo") String bizNo);
+	public Integer findBizSeqByBizNoAndApprvlY (@Param("bizNo")String bizNo, @Param("bizNm")String bizNm);
 	public int createBiz (UserVo userVo);
 	public int createBizUser (UserVo userVo);
 	public int createUser(UserVo userVo);

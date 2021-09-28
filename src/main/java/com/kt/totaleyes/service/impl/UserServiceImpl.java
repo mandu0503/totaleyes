@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.totaleyes.common.Const;
+import com.kt.totaleyes.common.Role;
 import com.kt.totaleyes.common.SearchVo;
 import com.kt.totaleyes.mapper.UserMapper;
 import com.kt.totaleyes.service.UserService;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int findBizSeqByBizNoAndApprvlY(String bizNo, String bizNm) {
+	public Integer findBizSeqByBizNoAndApprvlY(String bizNo, String bizNm) {
 		// TODO Auto-generated method stub
 		return userMapper.findBizSeqByBizNoAndApprvlY(bizNo, bizNm);
 	}
@@ -41,6 +42,8 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public boolean createUser(UserVo userVo) {
 		// TODO Auto-generated method stub
+		
+		userVo.setUserRole(Role.ROLE_USER.toString());
 		
 		if (StringUtils.equals(Const.YES, userVo.getMstrYn())) {
 			if (StringUtils.isNotEmpty(userVo.getBizNo()) && userMapper.countByBizNo(userVo.getBizNo()) == 0) {

@@ -23,24 +23,6 @@ public class UserRestController {
 	private UserService userService;
 	
 	/**
-	 * 사용자 등록
-	 * @param message
-	 * @param userVo
-	 * @return
-	 */
-	@RequestMapping("/register.do")
-	public GenericMessage register (GenericMessage message, UserVo userVo) {
-		
-		log.debug("** userVo:{}", userVo);
-		
-		boolean result = userService.createUser(userVo);
-		
-		message.setReturn(ReturnCode.OK);
-		message.setData(result);
-		return message;
-	}
-	
-	/**
 	 * 사용자 id 중복 체크
 	 * @param message
 	 * @param userId
@@ -88,11 +70,34 @@ public class UserRestController {
 	public GenericMessage findBizSeq (GenericMessage message, @RequestParam(name = "bizNo", defaultValue = "") String bizNo,
 			@RequestParam(name = "bizNm", defaultValue = "") String bizNm) {
 		
-		int count = userService.findBizSeqByBizNoAndApprvlY(bizNo, bizNm);
+		Integer bizSeq = userService.findBizSeqByBizNoAndApprvlY(bizNo, bizNm);
 		
 		message.setReturn(ReturnCode.OK);
-		message.setData(count);
 		
+		if (bizSeq == null) {
+			message.setData(-1);
+		} else {
+			message.setData(bizSeq);
+		}
+		
+		return message;
+	}
+	
+	/**
+	 * 사용자 등록
+	 * @param message
+	 * @param userVo
+	 * @return
+	 */
+	@RequestMapping("/register.do")
+	public GenericMessage register (GenericMessage message, UserVo userVo) {
+		
+		log.debug("** userVo:{}", userVo);
+		
+		boolean result = userService.createUser(userVo);
+		
+		message.setReturn(ReturnCode.OK);
+		message.setData(result);
 		return message;
 	}
 	
