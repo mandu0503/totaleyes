@@ -21,6 +21,9 @@ public class Pagenation implements Serializable{
 	private boolean prev;
 	private boolean next;
 	
+	private int prevPage;
+	private int nextPage;
+	
 	public int getRangeSize() {
 		return rangeSize;
 	}
@@ -108,34 +111,25 @@ public class Pagenation implements Serializable{
 			this.endPage = this.pageCnt;
 			this.next = false;
 		}
+		
+		this.prevPage = this.startPage - this.rangeSize;
+		this.nextPage = this.endPage + 1;
 	}
-	/*
-	public void pageInfo(int page, int startRange, int totCnt) {
-		this.page = page;
-		this.startRange = startRange;
-		this.totCnt = totCnt;
-		
-		//전체 페이지수 
-		this.pageCnt = (int) Math.ceil((float)totCnt/listSize);
-		
-		//시작 페이지
-		this.startPage = (startRange - 1) * rangeSize + 1 ;
-		
-		//끝 페이지
-		this.endPage = startRange * rangeSize;
-			
-		//게시판 시작번호
-		//this.startList = (page - 1) * listSize;
-		
-		//이전 버튼 상태
-		this.prev = startRange == 1 ? false : true;
-		
-		//다음 버튼 상태
-		this.next = endPage > pageCnt ? false : true;
-		if (this.endPage > this.pageCnt) {
-			this.endPage = this.pageCnt;
-			this.next = false;
-		}
+
+	public int getPrevPage() {
+		return prevPage;
 	}
-	*/
+
+	public void setPrevPage(int prevPage) {
+		this.prevPage = prevPage;
+	}
+
+	public int getNextPage() {
+		return nextPage;
+	}
+
+	public void setNextPage(int nextPage) {
+		this.nextPage = nextPage;
+	}
+
 }

@@ -21,7 +21,7 @@
 </div>
 <div>
 	<c:if test="${searchVo.prev}">
-		<a href="#" onClick="fn_pageGo('${searchVo.startPage - searchVo.rangeSize}')">Previous</a>
+		<a href="#" onClick="fn_pageGo('${searchVo.-prevPage}')">Previous</a>
 	</c:if>
 		
 	<c:forEach begin="${searchVo.startPage}" end="${searchVo.endPage}" var="idx">
@@ -29,6 +29,6 @@
 	</c:forEach>
 		
 	<c:if test="${searchVo.next}">
-		<a href="#" onClick="fn_pageGo('${searchVo.endPage + 1}')" >Next</a>
+		<a href="#" onClick="fn_pageGo('${searchVo.nextPage}')" >Next</a>
 	</c:if>
 </div>
