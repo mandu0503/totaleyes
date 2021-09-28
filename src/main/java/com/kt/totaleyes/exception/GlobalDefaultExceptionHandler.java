@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.kt.totaleyes.common.message.GenericMessage;
+import com.kt.totaleyes.common.message.ReturnCode;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,15 +25,19 @@ public class GlobalDefaultExceptionHandler {
 	private MessageSourceAccessor messageSourceAccessor;
 	
 	@ExceptionHandler(value = Exception.class) 
-	public String defaultErrorHandler(HttpServletRequest req, Exception e, Model model) throws Exception {
-		log.error(e.getMessage());
+	public String defaultErrorHandler(HttpServletRequest req, Exception ex, Model model) throws Exception {
+		log.error(ex.getMessage());
 		
-		if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) 
-			throw e;
+		if (AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class) != null) 
+			throw ex;
 		
 		if("XMLHttpRequest".equals(req.getHeader("X-Requested-With"))) {
 			String code = GenericMessage.NG;
 			
+			if ( ex instanceof Exception ){
+	            code = ReturnCode.NG.getCode();
+	        }
+			ReturnCode.NG.getCode();
 			model.addAttribute("returnCode", code);
 			model.addAttribute("message", messageSourceAccessor.getMessage(code));
 			return "jsonView";
