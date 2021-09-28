@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public int updateApprovalById(String userId, String updatedBy) {
 		// TODO Auto-generated method stub
 		
