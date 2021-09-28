@@ -12,15 +12,67 @@ $(document).ready(function() {
 
 	// 회원유형 선택
 	$('.join__select').click(function() {
-		var target = $(this).attr('data-target');
+		let target = $(this).attr('data-target');
 		
 		$('.wrap__member__content').hide();
 		$('.'+target).show();
 	});
 
-
+	// 소속 회사 확인
+	$('#btn_biz_search').on('click', function() {
+		if (isEmpty($('#sBizNm').val())) {
+			alert('회사명을 입력하세요.');
+			return false;
+		}
+		
+		if (isEmpty($('#sBizNo1').val()) || $('#sBizNo1').val().length != 3) {
+			alert('사업자 등록 번호1를 입력하세요.');
+			return false;
+		}
+		if (isEmpty($('#sBizNo2').val()) || $('#sBizNo2').val().length != 2) {
+			alert('사업자 등록 번호2를 입력하세요.');
+			return false;
+		}
+		if (isEmpty($('#sBizNo3').val()) || $('#sBizNo3').val().length != 5) {
+			alert('사업자 등록 번호를 입력하세요.');
+			return false;
+		}
+		
+		let bizNo = $('#sBizNo1').val() + $('#sBizNo2').val() + $('#sBizNo3').val();
+		let bizNm = $('#sBizNm').val();
+		
+		$.ajax({
+			url: '/api/user/findBizSeq.do',
+			type: 'post',
+			data: {bizNo: bizNo, bizNm: bizNm, '${_csrf.parameterName}': '${_csrf.token}'},
+			dataType: 'json',
+			async: false,
+			// beforeSend: function(xhr, opts) {
+			//	loading_start();
+			// },
+			success: function(res) {
+			//	loading_finish();
+				if (res.returnCode == '0000') {
+					if (res.data === -1) {
+						alert('해당하는 회사 정보가 없습니다.');
+					} else {
+						alert('가입할 수 있는 회사 정보가 존재합니다.');
+						$('#bizSeq').val(res.data);
+						$('#bizNo').val(bizNo);
+					}
+				} else {
+	 				alert(res.message);
+				}
+			},
+			error: function(error) {
+	//			loading_finish();
+				alert('서비스가 원활하지 않습니다. 잠시 후 다시 시도하세요.');
+			}
+		});
+	});
+	
 	// 회원가입완료
-	$('.btn__join__complete').on('click',function() {
+	$('.btn__join__complete').on('click', function() {
 		
 		if (isEmpty($('#userId').val())) {
 			alert('아이디를 입력하세요.');
@@ -34,6 +86,11 @@ $(document).ready(function() {
 		
 		if (isEmpty($('#pwd1').val())) {
 			alert('비밀번호 확인을 입력하세요.');
+			return false;
+		}
+		
+		if ($('#pwd').val() !== $('#pwd1').val()) {
+			alert('비밀번호가 맞지 않습니다.');
 			return false;
 		}
 		
@@ -52,7 +109,9 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		if ($('#mstrYn').val() === 'Y') {
+		let mstrYn = $('input[name=mstrYn]:checked').val();
+		
+		if (mstrYn === 'Y') {
 			
 			if (isEmpty($('#bizNm').val())) {
 				alert('회사명을 입력하세요.');
@@ -72,16 +131,12 @@ $(document).ready(function() {
 				return false;
 			}
 			
-			var bizNo = $('#bizNo1').val() + $('#bizNo2').val() + $('#bizNo3').val();
-			
-			console.log('bizNo', bizNo);
-			
+			let bizNo = $('#bizNo1').val() + $('#bizNo2').val() + $('#bizNo3').val();
+						
 			if (bizNo.length != 10) {
 				alert('사업자 등록 번호를 입력하세요.');
 				return false;
 			}
-			
-			$('#bizNo').val(bizNo);
 			
 			if (isEmpty($('#ceoNm').val())) {
 				alert('대표자 이름을 입력하세요.');
@@ -108,6 +163,7 @@ $(document).ready(function() {
 				return false;
 			}
 			
+			let checkBizNo = true;
 			// 사업자 등록번호 중복확인
 			$.ajax({
 				url: '/api/user/checkBizNo.do',
@@ -121,13 +177,14 @@ $(document).ready(function() {
 				success: function(res) {
 				//	loading_finish();
 					if (res.returnCode == '0000') {
-						if (res.data === 0) {
-							register();
+						if (res.data !== 0) {
+							alert('이미 등록된 사업자 번호가 있습니다.');
+							checkBizNo = false;
 						} else {
-							alert('사용자 ID가 중복되었습니다.');
+							$('#bizNo').val(bizNo);
 						}
 					} else {
-		 				alert(data.message);
+		 				alert(res.message);
 					}
 				},
 				error: function(error) {
@@ -135,9 +192,13 @@ $(document).ready(function() {
 					alert('서비스가 원활하지 않습니다. 잠시 후 다시 시도하세요.');
 				}
 			});
+			
+			if (!checkBizNo) {
+				return false;
+			}
 		}
 		
-		if ($('#mstrYn').val() === 'N') {
+		if (mstrYn === 'N') {
 			if (isEmpty($('#bizSeq').val())) {
 				alert('소속 회사를 확인하세요.');
 				return false;
@@ -162,7 +223,7 @@ $(document).ready(function() {
 						alert('사용자 ID가 중복되었습니다.');
 					}
 				} else {
-	 				alert(data.message);
+	 				alert(res.message);
 				}
 			},
 			error: function(error) {
@@ -193,9 +254,15 @@ $(document).ready(function() {
 		}
 
 	});
+	
+	
+	$('#btn_login').on('click', function(){
+		location.href="/login.do";
+	});
 
 // <-- ready function
 });
+
 function register() {
 
 	$.ajax({
@@ -212,7 +279,7 @@ function register() {
 				$('.container__join__complete, .pop--overlay').fadeIn('fast');
 				$('body').css('overflow','hidden')
 			} else {
- 				alert(data.message);
+ 				alert(res.message);
 			}
 		},
 		error: function(error) {
@@ -225,44 +292,32 @@ function register() {
 	
 	
 }
-
 </script>
-
 </head>
 
-
 <body>
-
 <div id="wrap"> 
-
-
 	<!-- header -->
 	<header id="header">
 		<div class="header">
 			<h1 class="sta"></h1>
 		</div>
 	</header>
-
 	<!-- 공통 메세지 레이어 -->
 	<div class="pop--fixed pop__msg pop400">
 		<div class="content__pop">
-			
 			<div class="wrap__pop__msg"></div>
-
 			<div class="wrap__pop__btn center">
 				<button type="button" class="btn__base btn__base--color1 btn__pop--close btn__pop--confirm">확인</button>
 				<button type="button" class="btn__base btn__base--line btn__pop--close btn__pop--cancel">취소</button>
 			</div>
-
 		</div>
 	</div>
 	<!--// 공통 메세지 레이어 -->
 	<div class="pop--overlay"></div>
 	<!--// header -->
 
-
 	<div class="wrap__join">
-		
 		<div class="tit__section">
 			<ul class="tit__section__info">
 				<li>홈</li>
@@ -270,12 +325,10 @@ function register() {
 				<li>가입정보 입력</li>
 			</ul>
 		</div>
-		
 		<div class="join__form join__form__step2">
 			<div class="tit__section">
 				<h2>가입정보 입력</h2>
 			</div>
-			
 			<div class="tit__sub">
 				<h3 class="fl">로그인 계정정보</h3>
 				<div class="fr font--color2">필수항목</div>
@@ -335,19 +388,19 @@ function register() {
 			<ul class="wrap__member__type">
 				<li>
 					<label class="radio__wrap">
-						<input type="radio" name="mstrYn" id="mstrYn" value ="Y" class="join__select" checked data-target="type1" /><span class="ico"></span>
+						<input type="radio" name="mstrYn" value ="Y" class="join__select" checked data-target="type1" /><span class="ico"></span>
 						<span class="for">회사 대표회원으로 가입합니다.(회사 관리자)</span>
 					</label>
 				</li>
 				<li>
 					<label class="radio__wrap">
-						<input type="radio" name="mstrYn" id="mstrYn" value ="N" class="join__select" data-target="type2" /><span class="ico"></span>
+						<input type="radio" name="mstrYn" value ="N" class="join__select" data-target="type2" /><span class="ico"></span>
 						<span class="for">회사 대표회원이 이미 가입하였으며, 구성원으로 가입합니다.</span>
 					</label>
 				</li>
 				<li>
 					<label class="radio__wrap">
-						<input type="radio" name="mstrYn" id="mstrYn" value ="" class="join__select" data-target="type3" /><span class="ico"></span>
+						<input type="radio" name="mstrYn" value ="" class="join__select" data-target="type3" /><span class="ico"></span>
 						<span class="for">회사에 소속되지 않았습니다.</span>
 					</label>
 				</li>
@@ -528,7 +581,7 @@ function register() {
 		-->
 		
 		<div class="wrap__page__btn center">
-			<button type="button" class="btn__base btn__base--color1">로그인</button>
+			<button type="button" class="btn__base btn__base--color1" id="btn_login">로그인</button>
 		</div>
 		
 	</div>

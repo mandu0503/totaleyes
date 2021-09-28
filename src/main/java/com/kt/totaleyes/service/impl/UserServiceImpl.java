@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.totaleyes.common.Const;
+import com.kt.totaleyes.common.Role;
 import com.kt.totaleyes.common.SearchVo;
 import com.kt.totaleyes.mapper.UserMapper;
 import com.kt.totaleyes.service.UserService;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int findBizSeqByBizNoAndApprvlY(String bizNo, String bizNm) {
+	public Integer findBizSeqByBizNoAndApprvlY(String bizNo, String bizNm) {
 		// TODO Auto-generated method stub
 		return userMapper.findBizSeqByBizNoAndApprvlY(bizNo, bizNm);
 	}
@@ -41,6 +42,8 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public boolean createUser(UserVo userVo) {
 		// TODO Auto-generated method stub
+		
+		userVo.setUserRole(Role.ROLE_USER.toString());
 		
 		if (StringUtils.equals(Const.YES, userVo.getMstrYn())) {
 			if (StringUtils.isNotEmpty(userVo.getBizNo()) && userMapper.countByBizNo(userVo.getBizNo()) == 0) {
@@ -74,6 +77,23 @@ public class UserServiceImpl implements UserService {
 	public List<UserVo> findByApprvlN(SearchVo searchVo) {
 		// TODO Auto-generated method stub
 		return userMapper.findByApprvlN(searchVo);
+	}
+
+	@Override
+	public int updateApprovalById(String userId, String updatedBy) {
+		// TODO Auto-generated method stub
+		
+		UserVo userVo = userMapper.findById(userId);
+		
+		if (userVo != null && StringUtils.equals(Const.NO, userVo.getApprvlYn()) 
+				&& (userVo.getMstrYn() == null || StringUtils.equals(Const.YES, userVo.getMstrYn()))) {
+			if (StringUtils.equals(Const.YES, userVo.getMstrYn())) {
+				return userMapper.updateForBizApprvl(userVo.getBizSeq(), updatedBy);
+			}
+			return userMapper.updateForApprvl(userId, updatedBy);
+		}
+		
+		return 0;
 	}
 
 	
