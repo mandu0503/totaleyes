@@ -1,6 +1,6 @@
 package com.kt.totaleyes.common;
 
-public class XssFilter {
+public class XssUtils {
 	public static String escape(String param) {
 		return param.replaceAll("<", "&lt;")
 					.replaceAll(">", "&gt;");
