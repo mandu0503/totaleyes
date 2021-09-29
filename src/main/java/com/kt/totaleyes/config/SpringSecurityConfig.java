@@ -40,6 +40,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	   	    .antMatchers("/api/user/**").permitAll()
 	   	    .antMatchers("/user/**").permitAll()
 	   	    .antMatchers("/sample/**").hasAnyRole("USER")
+	   	    .antMatchers("/rest/fileupload.do").hasAnyRole("USER, ADMIN")
 	        .antMatchers("/**").hasAnyRole("USER, ADMIN")
 	        //.antMatchers("/admin/**").access("ROLE_ADMIN")
 	        .antMatchers("/**").authenticated()

@@ -19,6 +19,38 @@ $(function(){
 	    	$("#listDiv").html(data);
 	    }
 	});
+	
+	$('#btnSubmit').click(function (event) {
+        event.preventDefault();
+        
+        var form = $('#fileUploadForm')[0];
+        var data = new FormData(form);
+        data.append('customField', '추가필드');
+        data.append('${_csrf.parameterName}', '${_csrf.token}');
+        $('#btnSubmit').prop('disabled', true);
+		
+        $.ajax({
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            url: '/rest/fileupload.do',
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                $('#result').text(data);
+                console.log('SUCCESS : ', data);
+                $('#btnSubmit').prop('disabled', false);
+            },
+            error: function (e) {
+                $('#result').text(e.responseText);
+                console.log('ERROR : ', e);
+                $('#btnSubmit').prop('disabled', false);
+            }
+        });
+        
+    });
 });
 //이전 버튼 이벤트
 function fn_prev(page, startRange, rangeSize) {
@@ -77,7 +109,7 @@ function fn_pageGo(page){
 }
 function fn_restSample(){
 	$.ajax({
-	    url:'/rest/sample1.do',
+	    url:'/rest/sample.do',
 	    type:'post',
 	    dataType: 'json',
 	    data: {
@@ -116,6 +148,14 @@ function fn_restSample(){
 	
 	<div> 
 		<button onclick="fn_restSample()">rest sample</button>
+	</div>
+	<div>
+		<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+	        <input type="text" name="extraField"/><br/><br/>
+	        <input type="file" name="uploadfiles"/><br/><br/>
+	        <input type="file" name="uploadfiles"/><br/><br/>
+	        <input type="submit" value="Submit" id="btnSubmit"/>
+	    </form>
 	</div>
 </body>
 </html>

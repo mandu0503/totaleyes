@@ -21,7 +21,7 @@
 </div>
 <div>
 	<c:if test="${searchVo.prev}">
-		<a href="#" onClick="fn_pageGo('${searchVo.-prevPage}')">Previous</a>
+		<a href="#" onClick="fn_pageGo('${searchVo.prevPage}')">Previous</a>
 	</c:if>
 		
 	<c:forEach begin="${searchVo.startPage}" end="${searchVo.endPage}" var="idx">
